@@ -1,0 +1,10 @@
+{
+  "firebase": "reactfb",
+  "public": "dist",
+  "ignore": [
+    "firebase.json",
+    "**/.*",
+    "**/node_modules/**",
+    "**/bower_components/**"
+  ]
+}
