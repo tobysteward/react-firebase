@@ -18,3 +18,7 @@ cd react-firebase
 ```bash
 $ npm install && bower install
 ```
+
+## Demo
+
+Hosted on Firebase at [https://reactfb.firebaseapp.com](https://reactfb.firebaseapp.com/)
