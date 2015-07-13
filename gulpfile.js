@@ -26,6 +26,7 @@ gulp.task('scripts:vendor', function (cb) {
 gulp.task('scripts:main', function (cb) {
     gulp.src('./src/js/**/*.js')
         .pipe(plugins.plumber())
+        .pipe(plugins.reactify())
         .pipe(plugins.jshint())
         .pipe(plugins.concat('main.js'))
         .pipe(plugins.uglify({ mangle: false }))
