@@ -6,9 +6,13 @@ var Firebase,
 
 var Comment = React.createClass({
     render: function () {
-        return React.createElement('div', {className: 'comment'},
-            React.createElement('h2', {className: 'commentAuthor'}, this.props.author),
-            React.createElement('span', {dangerouslySetInnerHTML: { __html: marked(this.props.children.toString(), {sanitize: true})}})
+        var rawMarkup = marked(this.props.children.toString(), {sanitize: true});
+
+        return (
+            <div className="comment">
+                <h2 class="commentAuthor">{ this.props.author }</h2>
+                <span dangerouslySetInnerHTML={ {__html: rawMarkup} } />
+            </div>
         );
     }
 });
@@ -16,10 +20,16 @@ var Comment = React.createClass({
 var CommentList = React.createClass({
     render: function () {
         var commentNodes = this.props.data.map(function (comment) {
-            return React.createElement(Comment, {author: comment.author}, comment.text);
+            return (
+                <Comment author={ comment.author }>{ comment.text }</Comment>
+            );
         });
 
-        return React.createElement('div', {className: 'commentList'}, commentNodes);
+        return (
+            <div className="commentList">
+                { commentNodes }
+            </div>
+        );
     }
 });
 
@@ -42,10 +52,12 @@ var CommentForm = React.createClass({
         return;
     },
     render: function () {
-        return React.createElement('form', {className: 'commentForm', onSubmit: this.handleSubmit},
-            React.createElement('input', {type: 'text', placeholder: 'Your name', ref: 'author'}),
-            React.createElement('input', {type: 'text', placeholder: 'Say something...', ref: 'text'}),
-            React.createElement('input', {type: 'submit', value: 'Post'})
+        return (
+            <form className="commentForm" onSubmit={ this.handleSubmit }>
+                <input type="text" placeholder="Your name" ref="author" />
+                <input type="text" placeholder="Say something..." ref="text" />
+                <input type="submit" value="Post" />
+            </form>
         );
     }
 });
@@ -81,15 +93,17 @@ var CommentBox = React.createClass({displayName: 'CommentBox',
         this.firebaseRef.off();
     },
     render: function () {
-        return React.createElement('div', {className: 'commentBox'},
-            React.createElement('h1', {}, 'Comments'),
-            React.createElement(CommentList, {data: this.state.data}),
-            React.createElement(CommentForm, {onCommentSubmit: this.handleCommentSubmit})
+        return (
+            <div className="commentBox">
+                <h1>Comments</h1>
+                <CommentList data={ this.state.data } />
+                <CommentForm onCommentSubmit={ this.handleCommentSubmit } />
+            </div>
         );
     }
 });
 
 React.render(
-    React.createElement(CommentBox, {url: 'https://reactfb.firebaseio.com/'}),
+    <CommentBox url="https://reactfb.firebaseio.com/" />,
     document.getElementById('content')
 );
