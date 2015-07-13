@@ -3,10 +3,6 @@
   "version": "1.0.0",
   "author": "Toby Steward <mail@tobysteward.com>",
   "description": "ReactJS Tutorial with Firebase",
-  "repository": {
-    "type": "git",
-    "url": "git@bitbucket.org:tobysteward/tudo.git"
-  },
   "license": "MIT",
   "devDependencies": {
     "del": "^1.2.0",
